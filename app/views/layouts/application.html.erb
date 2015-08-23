@@ -5,14 +5,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+<div class="container">
+  <div class="nav nav-bar">
+    <li>Home</li>
+    <li>About</li>
+  </div>
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
 
-<%= yield %>
-
+  <%= yield %>
+</div>
 </body>
 </html>
