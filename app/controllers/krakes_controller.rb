@@ -2,7 +2,11 @@ class KrakesController < ApplicationController
   def index
     @keyword_ids = []
     if !params[:k].nil?
-      @current_keywords = [params[:k0].downcase]
+      if !params[:k0].nil?
+        @current_keywords = [params[:k0].downcase]
+      else
+        @current_keywords = [nil]
+      end
       @current_keywords.concat(params[:k].split("+"))
     else
       @current_keywords = [params[:k0], nil, nil, nil, nil]

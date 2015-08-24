@@ -24,6 +24,22 @@
     </form>
   </div>
   <div class="col-md-8">
+    <% if !flash.empty? %>
+      <% flash.each do |key, value| %>
+        <% if value.class == String %>
+          <%= content_tag :div, value, class: "flash #{key}" %>
+        <% else %>
+          <% Array.new(value).each do |elem| %>
+              <div id="flash_message" class="alert alert-danger">
+                <%= elem %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
     <% if notice %>
       <p class="alert alert-success">
         <%= notice %>
