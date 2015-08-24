@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "keywords#index"
+  root to: "krakes#index"
 
   resources :entries
   resources :keywords
+  resources :krakes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

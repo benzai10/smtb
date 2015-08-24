@@ -1,2 +1,87 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.body {
+  background-color: #F8FFE5;
+}
+
+.menu-buttons {
+  margin-top: 34px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway";
+}
+
+p, div {
+  font-family: "Raleway";
+}
+
+h1 {
+  font-size: 2.61em;
+  color: #1B9AAA;
+  margin-top: 0.8em;
+  margin-bottom: 1.1em;
+}
+
+.btn {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #1B9AAA;
+  border-color: #1B9AAA;
+  &:hover {
+    background-color: #1B9AAA;
+    color: white;
+    border-color: #1B9AAA;
+  }
+}
+
+.explainer-text {
+  color: #66717E;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.no-keywords {
+  margin-top: 0px;
+}
+
+.keyword {
+  font-size: 1.8em;
+  color: #EF476F;
+  margin: 2px;
+  margin-left: 0px;
+  margin-right: 4px;
+  padding: 5px;
+  border: 2px solid #EF476F;
+  border-radius: 1px;
+}
+
+.entry-description {
+  margin-top: 20px;
+  font-size: 3.8em;
+  font-color: grey;
+}
+
+.entry-url {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.form-label {
+  color: #66717E;
+  font-size: 0.8em;
+  font-weight: 200;
+}
+
+.input-description {
+  font-size: 2.8em;
+}
+
+.input-url {
+  font-size: 1.8em;
+}
