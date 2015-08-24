@@ -3,13 +3,15 @@
 <head>
   <title>Smtb</title>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application" %>
 </head>
 <body>
 <div class="container">
-  <div class="nav nav-bar">
+  <ul class="nav nav-bar">
     <li>Home</li>
     <li>About</li>
-  </div>
+  </ul>
   <% if notice %>
     <p class="alert alert-success"><%= notice %></p>
   <% end %>
