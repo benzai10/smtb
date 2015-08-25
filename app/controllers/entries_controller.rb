@@ -53,7 +53,7 @@ class EntriesController < ApplicationController
       keyword_ids.sort!
       Krake.transaction do
         begin
-          krake = Krake.create(keyword_ids: keyword_ids.to_s)
+          krake = Krake.create(keyword_ids: "+" + keyword_ids.join("+") + "+")
           @entry = krake.entries.new
           @entry.user_id = current_user.id
           @entry.description = params[:entry][:description]

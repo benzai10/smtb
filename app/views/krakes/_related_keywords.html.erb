@@ -1,0 +1,18 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          RELATED KEYWORDS
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <% @related_keywords.each do |r| %>
+          <%= link_to Keyword.find(r).description, krakes_path(k0: Keyword.find(r).description, k: "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}"), class: "btn btn-default btn-xs" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

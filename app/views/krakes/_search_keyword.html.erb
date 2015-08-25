@@ -1,6 +1,6 @@
 <form class="form-inline">
   <%= form_tag krakes_path, method: :get do |f| %>
-    <%= text_field_tag :k0, "Enter a keyword", class: "form-control select_all_text", size: 40 %>
+    <%= text_field_tag :k0, "Enter a keyword", class: "form-control select_all_text", size: 44 %>
     <%= hidden_field_tag :k, "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}" %>
     <%= submit_tag "ADD", name: nil, class: "btn btn-primary" %>
   <% end %>

@@ -19,7 +19,9 @@ class KrakesController < ApplicationController
         @keyword_ids << 0
       end
     end
-    @existing_krake = Krake.find_by_keyword_ids(@keyword_ids.sort!.to_s)
+    @keyword_ids.sort!
+    @existing_krake = Krake.find_by_keyword_ids("+" + @keyword_ids.join("+") + "+")
+    @related_keywords = Krake.related_keywords(@keyword_ids) - @keyword_ids
     if !@existing_krake.nil?
       @best_entry = @existing_krake.entries.find_by_entry_type(1)
       @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
