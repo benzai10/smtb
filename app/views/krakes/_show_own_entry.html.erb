@@ -1,0 +1,8 @@
+<div class="show-entry">
+  <div class="time-stamp">
+    claimed <%= time_ago_in_words(@own_entry.created_at) %> ago (own entry)
+  </div>
+  <p class="entry-description"><%= @own_entry.description %></p>
+  <p class="entry-url"><%= link_to "#{@own_entry.url}", @own_entry.url, target: "_blank" %></p>
+  <%= render "entries/entry_actions" %>
+</div>

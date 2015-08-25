@@ -1,13 +1,18 @@
 <div class="entry-actions">
   <hr>
-  <% if @approved_entry.nil? && @best_entry.user_id != current_user.id %>
-    <%= link_to "APPROVE", add_approval_krake_path(@existing_krake), class: "btn btn-primary" %>
+  <% if !@own_entry.nil? %>
+    <%= link_to "DELETE", entry_path(@own_entry), method: :delete, class: "btn btn-primary" %>
+    <%= link_to "EDIT", "#", class: "btn btn-primary", id: "edit-entry-btn" %>
   <% else %>
-    <% if @best_entry.user_id == current_user.id %>
-      <button class="btn btn-status">YOU APPROVED (CREATED)</button>
+    <% if @approved_entry.nil? && @best_entry.user_id != current_user.id %>
+      <%= link_to "APPROVE", add_approval_krake_path(@existing_krake), class: "btn btn-primary" %>
     <% else %>
-      <button class="btn btn-status">YOU APPROVED</button>
+      <% if @best_entry.user_id == current_user.id %>
+        <button class="btn btn-status">YOU APPROVED (CREATED)</button>
+      <% else %>
+        <button class="btn btn-status">YOU APPROVED</button>
+      <% end %>
     <% end %>
+    <%= link_to "DISAGREE", "#", class: "btn btn-primary", id: "disagree-btn" %>
   <% end %>
-  <%= link_to "DISAGREE", "#", class: "btn btn-primary" %>
 </div>

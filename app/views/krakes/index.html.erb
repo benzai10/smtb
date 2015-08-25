@@ -29,7 +29,11 @@
       <% if @existing_krake.nil? %>
         <%= render "create_entry" %>
       <% else %>
-        <% if !@approved_entry.nil? %>
+        <%= render 'entries/new_entry' %>
+        <% if !@own_entry.nil? %>
+          <%= render "show_own_entry" %>
+          <%= render "entries/edit_entry" %>
+        <% elsif !@approved_entry.nil? %>
           <%= render "show_approved_entry" %>
         <% else %>
           <% if !@best_entry.nil? %>

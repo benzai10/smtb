@@ -23,6 +23,7 @@ class KrakesController < ApplicationController
     if !@existing_krake.nil?
       @best_entry = @existing_krake.entries.find_by_entry_type(1)
       @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
+      @own_entry = @existing_krake.entries.where(entry_type: 3, user_id: current_user.id).last
     end
   end
 
