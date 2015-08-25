@@ -21,8 +21,18 @@ class KrakesController < ApplicationController
     end
     @existing_krake = Krake.find_by_keyword_ids(@keyword_ids.sort!.to_s)
     if !@existing_krake.nil?
-      @entry = @existing_krake.entries.first
+      @best_entry = @existing_krake.entries.find_by_entry_type(1)
+      @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
     end
-    @keywords = Keyword.all
+  end
+
+  def add_approval
+    @krake = Krake.find(params[:id])
+    current_best_entry = @krake.entries.where(entry_type: 1).last
+    @krake.entries.create!(description: current_best_entry.description,
+                           url: current_best_entry.url,
+                           entry_type: 2,
+                           user_id: current_user.id)
+    redirect_to :root
   end
 end

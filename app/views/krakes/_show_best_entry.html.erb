@@ -1,0 +1,10 @@
+<div class="show-entry">
+  <div class="time-stamp">
+    <% if !@best_entry.nil? %>
+      claimed <%= time_ago_in_words(@best_entry.created_at) %> ago by <%= User.find_by_id(@best_entry.user_id).username %>
+    <% end %>
+  </div>
+  <p class="entry-description"><%= @best_entry.description %></p>
+  <p class="entry-url"><%= link_to "#{@best_entry.url}", @best_entry.url, target: "_blank" %></p>
+  <%= render "entries/entry_actions" %>
+</div>

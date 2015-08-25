@@ -1,4 +1,9 @@
 class Entry < ActiveRecord::Base
+  # Entry types
+  # 1: Best-entry
+  # 2: Approval entry
+  # 3: Individual entry
+
   belongs_to :krake
   validates :url, :format => URI::regexp(%w(http https)), unless: :url_empty?
 

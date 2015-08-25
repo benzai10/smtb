@@ -32,6 +32,7 @@ class EntriesController < ApplicationController
         @entry.user_id = current_user.id
         @entry.description = params[:entry][:description]
         @entry.url = params[:entry][:url]
+        @entry.entry_type = 1
         @entry.save!
         redirect_to krakes_path(k0: k0, k: k)
         return

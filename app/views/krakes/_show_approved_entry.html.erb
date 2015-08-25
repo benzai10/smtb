@@ -1,0 +1,8 @@
+<div class="show-entry">
+  <div class="time-stamp">
+    approved <%= time_ago_in_words(@approved_entry.created_at) %> ago, created by <%= User.find_by_id(@best_entry.user_id).username %>
+  </div>
+  <p class="entry-description"><%= @approved_entry.description %></p>
+  <p class="entry-url"><%= link_to "#{@approved_entry.url}", @approved_entry.url, target: "_blank" %></p>
+  <%= render "entries/entry_actions" %>
+</div>

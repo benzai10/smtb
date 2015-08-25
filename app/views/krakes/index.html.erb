@@ -1,5 +1,5 @@
 <div class="row">
-  <%= render "title_bar" %>
+  <%= render "layouts/title_bar" %>
 </div>
 <div class="row">
   <div class="col-md-4">
@@ -16,18 +16,6 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-  <!--
-    <h5>Related Keywords:</h5>
-    <ul>
-      <%# @keywords.each do |k| %>
-        <li><%#= k.description %></li>
-      <%# end %>
-    </ul>
-  -->
-    <br><br><br>
-    <% if !@entry.nil? %>
-      <%= time_ago_in_words(@entry.created_at) %> ago by <%#= User.find_by_id(@entry.user_id).username %>
-    <% end %>
   </div>
   <div class="col-md-8">
     <% if @current_keywords[0].nil? %>
@@ -41,8 +29,12 @@
       <% if @existing_krake.nil? %>
         <%= render "create_entry" %>
       <% else %>
-        <% if !@entry.nil? %>
-          <%= render "show_entry" %>
+        <% if !@approved_entry.nil? %>
+          <%= render "show_approved_entry" %>
+        <% else %>
+          <% if !@best_entry.nil? %>
+            <%= render "show_best_entry" %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
