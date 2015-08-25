@@ -97,6 +97,10 @@
       <%# end %>
     </ul>
   -->
+    <br><br><br>
+    <% if !@entry.nil? %>
+      Created on: <%= @entry.created_at %> by <%#= User.find_by_id(@entry.user_id).username %>
+    <% end %>
   </div>
   <div class="col-md-8">
     <% if @current_keywords[0].nil? %>
