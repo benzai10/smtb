@@ -1,89 +1,16 @@
 <div class="row">
-  <div class="col-md-4">
-    <h1>showmethebest.xyz</h1>
-  </div>
-  <div class="col-md-8">
-    <span class="menu-buttons pull-right">
-      <% if user_signed_in? %>
-        <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-      <% else %>
-        <%= link_to "LOGIN", new_user_session_path, class: "btn btn-primary" %>
-        <%= link_to "SIGN UP", new_user_registration_path, class: "btn btn-primary" %>
-      <% end %>
-    </span>
-  </div>
+  <%= render "title_bar" %>
 </div>
 <div class="row">
   <div class="col-md-4">
-    <form class="form-inline">
-      <%= form_tag krakes_path, method: :get do |f| %>
-        <%= text_field_tag :k0, "Enter a keyword", class: "form-control select_all_text", size: 40 %>
-        <%= hidden_field_tag :k, "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}" %>
-        <%= submit_tag "ADD", name: nil, class: "btn btn-primary" %>
-      <% end %>
-    </form>
+    <%= render "search_keyword" %>
   </div>
   <div class="col-md-8">
-    <% if !flash.empty? %>
-      <% flash.each do |key, value| %>
-        <% if value.class == String %>
-          <%= content_tag :div, value, class: "flash #{key}" %>
-        <% else %>
-          <% Array.new(value).each do |elem| %>
-              <div id="flash_message" class="alert alert-danger">
-                <%= elem %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <% if notice %>
-      <p class="alert alert-success">
-        <%= notice %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger">
-        <%= alert %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </p>
-    <% end %>
+    <%= render "layouts/flash_messages" %>
     <% if @current_keywords[0].nil? %>
       <h2 class="no-keywords">The Remedy for Information Overload</h2>
     <% else %>
-      <% if !@current_keywords[0].nil? %>
-        <span class="keyword">
-          <%= @current_keywords[0] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[1], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
-        </span>
-      <% end %>
-      <% if !@current_keywords[1].nil? %>
-        <span class="keyword">
-          <%= @current_keywords[1] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
-        </span>
-      <% end %>
-      <% if !@current_keywords[2].nil? %>
-        <span class="keyword">
-          <%= @current_keywords[2] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
-        </span>
-      <% end %>
-      <% if !@current_keywords[3].nil? %>
-        <span class="keyword">
-          <%= @current_keywords[3] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[4]}") %></small>
-        </span>
-      <% end %>
-      <% if !@current_keywords[4].nil? %>
-        <span class="keyword">
-          <%= @current_keywords[4] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}") %></small>
-        </span>
-      <% end %>
+      <%= render "show_keywords" %>
     <% end %>
   </div>
 </div>
@@ -99,7 +26,7 @@
   -->
     <br><br><br>
     <% if !@entry.nil? %>
-      Created on: <%= @entry.created_at %> by <%#= User.find_by_id(@entry.user_id).username %>
+      <%= time_ago_in_words(@entry.created_at) %> ago by <%#= User.find_by_id(@entry.user_id).username %>
     <% end %>
   </div>
   <div class="col-md-8">
@@ -112,26 +39,10 @@
       </p>
     <% else %>
       <% if @existing_krake.nil? %>
-        <h2>Be the first to add an entry!</h2>
-        <p class="explainer-text">
-          Add a short description (name, product, place etc.) and a link which you think is the best resource for these keywords. Help others to get the best and eliminate the agony of choice in the age of information overload.
-        </p>
-        <%= simple_form_for Entry.new do |f| %>
-          <%= f.hidden_field :current_keywords, value: @current_keywords %>
-          <%= f.input :description,
-                      label: "DESCRIPTION",
-                      label_html: { class: "form-label" },
-                      input_html: { class: "input-description", rows: 1, maxlength: 50 } %>
-          <%= f.input :url,
-                      label: "URL",
-                      label_html: { class: "form-label" },
-                      input_html: { class: "input-url", rows: 1 } %>
-          <%= f.button :submit, "CREATE ENTRY", class: "btn btn-primary" %>
-        <% end %>
+        <%= render "create_entry" %>
       <% else %>
         <% if !@entry.nil? %>
-          <p class="entry-description"><%= @entry.description %></p>
-          <p class="entry-url"><%= link_to "#{@entry.url}", @entry.url, target: "_blank" %></p>
+          <%= render "show_entry" %>
         <% end %>
       <% end %>
     <% end %>

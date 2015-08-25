@@ -1,0 +1,24 @@
+<div class="create-entry">
+  <h2>Be the first to add an entry!</h2>
+  <p class="explainer-text">
+    Add a short description (name, product, place etc.) and a link which you think is the best resource for these keywords. Help others to get the best and eliminate the agony of choice in the age of information overload.
+  </p>
+  <%= simple_form_for Entry.new do |f| %>
+    <%= f.hidden_field :current_keywords, value: @current_keywords %>
+    <%= f.input :description,
+                label: "DESCRIPTION",
+                label_html: { class: "form-label" },
+                input_html: { class: "input-description", rows: 1, maxlength: 50 } %>
+    <%= f.input :url,
+                label: "URL",
+                label_html: { class: "form-label" },
+                input_html: { class: "input-url", rows: 1 } %>
+    <% if user_signed_in? %>
+      <%= f.button :submit, "CREATE ENTRY", class: "btn btn-primary" %>
+    <% else %>
+      <p class="explainer-text">
+        Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to create an entry.
+      </p>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div class="col-md-4">
+  <h1>showmethebest.xyz</h1>
+</div>
+<div class="col-md-8">
+  <span class="menu-buttons pull-right">
+    <% if user_signed_in? %>
+      <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+    <% else %>
+      <%= link_to "LOGIN", new_user_session_path, class: "btn btn-primary" %>
+      <%= link_to "SIGN UP", new_user_registration_path, class: "btn btn-primary" %>
+    <% end %>
+  </span>
+</div>
