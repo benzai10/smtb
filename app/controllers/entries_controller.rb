@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
       new_entry.description = params[:entry][:description]
       new_entry.url = params[:entry][:url]
       new_entry.entry_type = 3
-      if new_entry.save!
+      if new_entry.save
         current_keywords.shift
         k = current_keywords
         if k.count > 0
@@ -56,9 +56,16 @@ class EntriesController < ApplicationController
           krake = Krake.create(keyword_ids: "+" + keyword_ids.join("+") + "+")
           @entry = krake.entries.new
           @entry.user_id = current_user.id
-          @entry.description = params[:entry][:description]
-          @entry.url = params[:entry][:url]
-          @entry.entry_type = 1
+          if params[:commit] == "REQUEST AN ENTRY"
+            @entry.description = "request"
+            @entry.url = ""
+            @entry.entry_type = 4
+            flash[:notice] = "Your request was saved."
+          else
+            @entry.description = params[:entry][:description]
+            @entry.url = params[:entry][:url]
+            @entry.entry_type = 1
+          end
           @entry.save!
           redirect_to krakes_path(k0: k0, k: k)
           return

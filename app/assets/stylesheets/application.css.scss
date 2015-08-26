@@ -33,8 +33,12 @@ h1 {
   margin-bottom: 1.1em;
 }
 
+.approval-score {
+  margin-top: 26px;
+}
+
 .time-stamp {
-  margin-top: 20px;
+  margin-top: -15px;
   font-size: 12px;
   color: #66717E;
 }
@@ -123,4 +127,8 @@ h1 {
   .panel-title-related-keywords {
     color: #EF476F;
   }
+}
+
+.user-panel-entry {
+  font-size: 11px;
 }

@@ -17,6 +17,7 @@
 <div class="row">
   <div class="col-md-4">
     <%= render "related_keywords" %>
+    <%= render "user_panel" %>
   </div>
   <div class="col-md-8">
     <% if @current_keywords[0].nil? %>
@@ -27,7 +28,7 @@
         Start with entering a keyword in the upper left input field. Have fun!
       </p>
     <% else %>
-      <% if @existing_krake.nil? %>
+      <% if @existing_krake.nil? || @request_entries.count > 0 %>
         <%= render "create_entry" %>
       <% else %>
         <%= render 'entries/new_entry' %>
@@ -39,6 +40,7 @@
         <% else %>
           <% if !@best_entry.nil? %>
             <%= render "show_best_entry" %>
+            <%= render "entries/edit_best_entry" %>
           <% end %>
         <% end %>
       <% end %>

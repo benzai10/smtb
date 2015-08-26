@@ -1,0 +1,51 @@
+<div class="modal fade" id="sign_up">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header centered">
+        <button class="close" data-dismiss="modal">x</button>
+        <h2>sign up</h2>
+      </div>
+
+      <div class="modal-body">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div>
+            <%= f.input :username,
+                        autofocus: true,
+                        label: "USERNAME",
+                        label_html: { class: "form-label" } %>
+          </div>
+          <div>
+            <%= f.input :email,
+                        label: "EMAIL",
+                        label_html: { class: "form-label" } %>
+          </div>
+          <div>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.input :password,
+                        autocomplete: "off", 
+                        label: "PASSWORD",
+                        label_html: { class: "form-label" } %>
+          </div>
+          <div>
+            <%= f.input :password_confirmation,
+                        autocomplete: "off",
+                        label: "PASSWORD CONFIRMATION",
+                        label_html: { class: "form-label" } %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <p>
+            <div>
+              <%= f.submit "SIGN UP", class: "btn btn-primary" %>
+              <a href="#" class="btn btn-primary" data-dismiss="modal">CLOSE</a>
+            </div>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

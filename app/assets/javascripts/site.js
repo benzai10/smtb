@@ -23,4 +23,9 @@ $(function() {
     $(".show-entry").addClass('hidden');
     $(".edit-entry").removeClass('hidden');
   });
+
+  $("#edit-best-entry-btn").on('click', function() {
+    $(".show-entry").addClass('hidden');
+    $(".edit-best-entry").removeClass('hidden');
+  });
 });

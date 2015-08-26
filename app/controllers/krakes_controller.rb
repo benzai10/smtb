@@ -24,8 +24,19 @@ class KrakesController < ApplicationController
     @related_keywords = Krake.related_keywords(@keyword_ids) - @keyword_ids
     if !@existing_krake.nil?
       @best_entry = @existing_krake.entries.find_by_entry_type(1)
-      @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
-      @own_entry = @existing_krake.entries.where(entry_type: 3, user_id: current_user.id).last
+      approved_count = @existing_krake.entries.where(entry_type: 2).count
+      disagreed_count = @existing_krake.entries.where(entry_type: 3).count
+      @approval_score = 100 * (approved_count + 1) / (approved_count + 1 + disagreed_count)
+      if user_signed_in?
+        @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
+        @own_entry = @existing_krake.entries.where(entry_type: 3, user_id: current_user.id).last
+      end
+      @request_entries = @existing_krake.entries.where(entry_type: 4)
+      @own_request_entry = @request_entries.find_by_user_id(current_user.id)
+    end
+    if user_signed_in?
+      @user_created_entries = Entry.where(user_id: current_user.id, entry_type: [1, 3])
+      @user_approved_entries = Entry.where(user_id: current_user.id, entry_type: 2)
     end
   end
 

@@ -1,5 +1,8 @@
 <div class="show-entry">
-  <div class="time-stamp">
+  <div class="approval-score">
+    Approval Score: <strong><%= @approval_score %></strong>
+  </div>
+  <div class="time-stamp pull-right">
     <% if !@best_entry.nil? %>
       claimed <%= time_ago_in_words(@best_entry.created_at) %> ago by <%= User.find_by_id(@best_entry.user_id).username %>
     <% end %>

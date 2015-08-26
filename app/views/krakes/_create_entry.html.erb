@@ -15,9 +15,19 @@
                 input_html: { class: "input-url", rows: 1 } %>
     <% if user_signed_in? %>
       <%= f.button :submit, "CREATE ENTRY", class: "btn btn-primary" %>
+      <% if !@own_request_entry.nil? %>
+        <button class="btn btn-status">ENTRY REQUESTED (<%= @request_entries.count %>)</button>
+      <% else %>
+        &nbsp;&nbsp;or&nbsp;&nbsp;
+        <% if !@request_entries.nil? %>
+          <%= f.button :submit, "REQUEST AN ENTRY (#{@request_entries.count})", class: "btn btn-primary" %>
+        <% else %>
+          <%= f.button :submit, "REQUEST AN ENTRY", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
     <% else %>
       <p class="explainer-text">
-        Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to create an entry.
+        Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to create or request an entry.
       </p>
     <% end %>
   <% end %>

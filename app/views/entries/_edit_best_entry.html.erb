@@ -1,0 +1,16 @@
+<div class="edit-best-entry hidden">
+  <h2>Edit entry</h2>
+  <%= simple_form_for @best_entry do |f| %>
+    <%= f.hidden_field :current_keywords, value: @current_keywords %>
+    <%= f.input :description,
+                label: "DESCRIPTION",
+                label_html: { class: "form-label" },
+                input_html: { class: "input-description", rows: 1, maxlength: 50 } %>
+    <%= f.input :url,
+                label: "URL",
+                label_html: { class: "form-label" },
+                input_html: { class: "input-url", rows: 1 } %>
+    <%= link_to "CANCEL", "#", class: "btn btn-primary", id: "edit-entry-cancel-btn" %>
+    <%= f.button :submit, "UPDATE ENTRY", class: "btn btn-primary" %>
+  <% end %>
+</div>
