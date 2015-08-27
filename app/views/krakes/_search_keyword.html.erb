@@ -1,7 +1,15 @@
 <form class="form-inline">
-  <%= form_tag krakes_path, method: :get do |f| %>
-    <%= text_field_tag :k0, "Enter a keyword", class: "form-control select_all_text", size: 44 %>
-    <%= hidden_field_tag :k, "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}" %>
-    <%= submit_tag "ADD", name: nil, class: "btn btn-primary" %>
+  <% if @keyword_ids.count < 5 || params[:k0].nil? %>
+    <%= form_tag krakes_path, method: :get do |f| %>
+      <%= text_field_tag :k0, "Enter a keyword", class: "form-control select_all_text", size: 44 %>
+      <%= hidden_field_tag :k, "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}" %>
+      <%= submit_tag "ADD", name: nil, class: "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <%= form_tag krakes_path, method: :get do |f| %>
+      <%= text_field_tag :k0, "You can't enter more than 5 keywords", class: "form-control", size: 44, disabled: true %>
+      <%#= hidden_field_tag :k, "#{@current_keywords[0]}+#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}" %>
+      <%= submit_tag "ADD", name: nil, disabled: true, class: "btn btn-primary" %>
+    <% end %>
   <% end %>
 </form>

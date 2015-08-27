@@ -26,7 +26,7 @@ class EntriesController < ApplicationController
         return
       else
         flash[:error] = new_entry.errors.full_messages
-        redirect_to :back
+        redirect_to krakes_path(k0: k0, k: k, description: params[:entry][:description], url: params[:entry][:url])
       end
     else
       # Create keyword if it doesn't exist yet
@@ -53,10 +53,13 @@ class EntriesController < ApplicationController
       keyword_ids.sort!
       Krake.transaction do
         begin
-          krake = Krake.create(keyword_ids: "+" + keyword_ids.join("+") + "+")
+          krake = Krake.find_by_keyword_ids("+" + keyword_ids.join("+") + "+")
+          if krake.nil?
+            krake = Krake.create(keyword_ids: "+" + keyword_ids.join("+") + "+")
+          end
           @entry = krake.entries.new
           @entry.user_id = current_user.id
-          if params[:commit] == "REQUEST AN ENTRY"
+          if params[:commit].first(7) == "REQUEST"
             @entry.description = "request"
             @entry.url = ""
             @entry.entry_type = 4
@@ -71,7 +74,7 @@ class EntriesController < ApplicationController
           return
         rescue
           flash[:error] = @entry.errors.full_messages
-          redirect_to :back
+          redirect_to krakes_path(k0: k0, k: k, description: params[:entry][:description], url: params[:entry][:url])
         end
         raise ActiveRecord::Rollback
         redirect_to :back
@@ -80,11 +83,20 @@ class EntriesController < ApplicationController
   end
 
   def update
+    current_keywords = params[:entry][:current_keywords].split
+    k0 = current_keywords.first
+    current_keywords.shift
+    k = current_keywords
+    if k.count > 0
+      k = k.join("+")
+    else
+      k = ""
+    end
     @entry = Entry.find(params[:id])
     @entry.description = params[:entry][:description]
     @entry.url = params[:entry][:url]
     if @entry.save
-      redirect_to :root
+      redirect_to krakes_path(k0: k0, k: k)
     else
       flash[:error] = @entry.errors.full_messages
       redirect_to :back
@@ -92,8 +104,21 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    @entry = Entry.find(params[:id])
-    @entry.destroy
-    redirect_to :root
+    if !params[:k0].nil? || !params[:k].nil?
+      current_keywords = params[:k].split
+      k = current_keywords
+      if k.count > 0
+        k = k.join("+")
+      else
+        k = ""
+      end
+      @entry = Entry.find(params[:id])
+      @entry.destroy
+      redirect_to krakes_path(k0: params[:k0], k: k)
+    else
+      @entry = Entry.find(params[:id])
+      @entry.destroy
+      redirect_to :root
+    end
   end
 end

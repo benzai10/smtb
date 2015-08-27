@@ -4,10 +4,16 @@
   </div>
   <div class="time-stamp pull-right">
     <% if !@best_entry.nil? %>
-      claimed <%= time_ago_in_words(@best_entry.created_at) %> ago by <%= User.find_by_id(@best_entry.user_id).username %>
+      created <%= time_ago_in_words(@best_entry.created_at) %> ago by <%= User.find_by_id(@best_entry.user_id).username %>
     <% end %>
   </div>
   <p class="entry-description"><%= @best_entry.description %></p>
-  <p class="entry-url"><%= link_to "#{@best_entry.url}", @best_entry.url, target: "_blank" %></p>
+  <p class="entry-url">
+    <% if @best_entry.url.empty? %>
+      No weblink added yet.
+    <% else %>
+      <%= link_to "#{@best_entry.url}", @best_entry.url, target: "_blank" %>
+    <% end %>
+  </p>
   <%= render "entries/entry_actions" %>
 </div>

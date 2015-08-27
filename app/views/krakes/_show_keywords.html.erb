@@ -1,25 +1,32 @@
+<p class="keyword-list">
 <% if !@current_keywords[0].nil? %>
   <span class="keyword">
-    <%= @current_keywords[0] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[1], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
+    <%= @current_keywords[0] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[1], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}"), class: "keyword-x" %></small>
+    &nbsp;
   </span>
 <% end %>
 <% if !@current_keywords[1].nil? %>
   <span class="keyword">
-    <%= @current_keywords[1] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
+    <%= @current_keywords[1] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[2]}+#{@current_keywords[3]}+#{@current_keywords[4]}"), class: "keyword-x"  %></small>
+    &nbsp;
   </span>
 <% end %>
 <% if !@current_keywords[2].nil? %>
   <span class="keyword">
-    <%= @current_keywords[2] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[3]}+#{@current_keywords[4]}") %></small>
+    <%= @current_keywords[2] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[3]}+#{@current_keywords[4]}"), class: "keyword-x" %></small>
+    &nbsp;
   </span>
 <% end %>
 <% if !@current_keywords[3].nil? %>
   <span class="keyword">
-    <%= @current_keywords[3] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[4]}") %></small>
+    <%= @current_keywords[3] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[4]}"), class: "keyword-x" %></small>
+    &nbsp;
   </span>
 <% end %>
 <% if !@current_keywords[4].nil? %>
   <span class="keyword">
-    <%= @current_keywords[4] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}") %></small>
+    <%= @current_keywords[4] %> <small><%= link_to "x", krakes_path(k0: @current_keywords[0], k: "#{@current_keywords[1]}+#{@current_keywords[2]}+#{@current_keywords[3]}"), class: "keyword-x" %></small>
+    &nbsp;
   </span>
 <% end %>
+</p>

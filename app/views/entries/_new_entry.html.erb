@@ -10,17 +10,17 @@
     <%= f.input :description,
                 label: "DESCRIPTION",
                 label_html: { class: "form-label" },
-                input_html: { class: "input-description", rows: 1, maxlength: 50 } %>
+                input_html: { class: "input-description", rows: 1, maxlength: 50, value: params[:description] } %>
     <%= f.input :url,
                 label: "URL",
                 label_html: { class: "form-label" },
-                input_html: { class: "input-url", rows: 1 } %>
+                input_html: { class: "input-url", rows: 1, value: params[:url] } %>
     <% if user_signed_in? %>
       <%= link_to "CANCEL", "#", class: "btn btn-primary", id: "new-entry-cancel-btn" %>
       <%= f.button :submit, "CREATE ENTRY", class: "btn btn-primary" %>
     <% else %>
       <p class="explainer-text">
-        Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to create an entry.
+        Please <%= link_to "login", "#login", data: { toggle: "modal" } %> or <%= link_to "sign up", "#sign_up", data: { toggle: "modal" } %> to create an entry or go <%= link_to "back", "#", id: "new-entry-cancel-btn" %>.
       </p>
     <% end %>
   <% end %>

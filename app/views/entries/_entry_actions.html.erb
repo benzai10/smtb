@@ -1,11 +1,11 @@
 <div class="entry-actions">
   <hr>
   <% if !@own_entry.nil? %>
-    <%= link_to "DELETE", entry_path(@own_entry), method: :delete, class: "btn btn-primary" %>
+    <%= link_to "DELETE", entry_path(@own_entry, k0: params[:k0], k: params[:k]), method: :delete, class: "btn btn-primary" %>
     <%= link_to "EDIT", "#", class: "btn btn-primary", id: "edit-entry-btn" %>
   <% else %>
     <% if user_signed_in? && @approved_entry.nil? && @best_entry.user_id != current_user.id %>
-      <%= link_to "APPROVE", add_approval_krake_path(@existing_krake), class: "btn btn-primary" %>
+      <%= link_to "APPROVE", add_approval_krake_path(@existing_krake, keywords: @current_keywords), class: "btn btn-primary" %>
     <% else %>
       <% if user_signed_in? %>
         <% if @best_entry.user_id == current_user.id %>
@@ -16,9 +16,9 @@
           <button class="btn btn-status">YOU APPROVED</button>
         <% end %>
       <% else %>
-        <%= link_to "APPROVE", "#", class: "btn btn-primary" %>
+        <%= link_to "APPROVE", "#login", data: { toggle: "modal" }, class: "btn btn-primary" %>
       <% end %>
     <% end %>
-    <%= link_to "DISAGREE", "#", class: "btn btn-primary", id: "disagree-btn" %>
+    <%= link_to "DISAPPROVE", "#", class: "btn btn-primary", id: "disagree-btn" %>
   <% end %>
 </div>

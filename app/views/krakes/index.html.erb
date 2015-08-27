@@ -28,7 +28,7 @@
         Start with entering a keyword in the upper left input field. Have fun!
       </p>
     <% else %>
-      <% if @existing_krake.nil? || @request_entries.count > 0 %>
+      <% if @existing_krake.nil? && (@request_entries.nil? || @request_entries.count > 0)  %>
         <%= render "create_entry" %>
       <% else %>
         <%= render 'entries/new_entry' %>
@@ -41,6 +41,8 @@
           <% if !@best_entry.nil? %>
             <%= render "show_best_entry" %>
             <%= render "entries/edit_best_entry" %>
+          <% else %>
+            <%= render "create_entry" %>
           <% end %>
         <% end %>
       <% end %>

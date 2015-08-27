@@ -1,9 +1,15 @@
 <div class="show-entry">
   <br><br>
   <div class="time-stamp pull-right">
-    claimed <%= time_ago_in_words(@own_entry.created_at) %> ago (own entry)
+    created <%= time_ago_in_words(@own_entry.created_at) %> ago (own entry)
   </div>
   <p class="entry-description"><%= @own_entry.description %></p>
-  <p class="entry-url"><%= link_to "#{@own_entry.url}", @own_entry.url, target: "_blank" %></p>
+  <p class="entry-url">
+    <% if @own_entry.url.empty? %>
+      No weblink added yet.
+    <% else %>
+      <%= link_to "#{@own_entry.url}", @own_entry.url, target: "_blank" %>
+    <% end %>
+  </p>
   <%= render "entries/entry_actions" %>
 </div>

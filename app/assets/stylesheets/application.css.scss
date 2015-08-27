@@ -79,15 +79,28 @@ h1 {
   margin-top: 0px;
 }
 
+.keyword-list {
+  float: left;
+  line-height: 320%;
+}
+
 .keyword {
   font-size: 1.8em;
   color: #EF476F;
-  margin: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-right: 2px;
   margin-left: 0px;
-  margin-right: 4px;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 0px;
   border: 2px solid #EF476F;
   border-radius: 1px;
+}
+
+.keyword-x {
+  margin-right: -4px;
 }
 
 .entry-description {

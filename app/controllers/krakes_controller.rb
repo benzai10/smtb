@@ -30,9 +30,10 @@ class KrakesController < ApplicationController
       if user_signed_in?
         @approved_entry = @existing_krake.entries.where(entry_type: 2, user_id: current_user.id).last
         @own_entry = @existing_krake.entries.where(entry_type: 3, user_id: current_user.id).last
+        @request_entries = @existing_krake.entries.where(entry_type: 4)
+        @own_request_entry = @request_entries.find_by_user_id(current_user.id)
       end
       @request_entries = @existing_krake.entries.where(entry_type: 4)
-      @own_request_entry = @request_entries.find_by_user_id(current_user.id)
     end
     if user_signed_in?
       @user_created_entries = Entry.where(user_id: current_user.id, entry_type: [1, 3])
@@ -47,6 +48,15 @@ class KrakesController < ApplicationController
                            url: current_best_entry.url,
                            entry_type: 2,
                            user_id: current_user.id)
-    redirect_to :root
+    current_keywords = params[:keywords]
+    k0 = current_keywords.first
+    current_keywords.shift
+    k = current_keywords
+    if k.count > 0
+      k = k.join("+")
+    else
+      k = ""
+    end
+    redirect_to krakes_path(k0: k0, k: k)
   end
 end
