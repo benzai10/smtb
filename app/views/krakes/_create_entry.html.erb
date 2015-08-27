@@ -27,7 +27,7 @@
       <% end %>
     <% else %>
       <p class="explainer-text">
-        Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to create or request an entry.
+        Please <%= link_to "login", "#login", data: { toggle: "modal" } %> or <%= link_to "sign up", "#sign_up", data: { toggle: "modal" } %> to create an entry or go <%= link_to "back", "#", id: "new-entry-cancel-btn" %>.
       </p>
     <% end %>
   <% end %>
