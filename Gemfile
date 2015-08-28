@@ -50,3 +50,11 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  # Capistrano for deployment to Ubuntu on Digitalocean
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rails', '~> 1.1.3'
+  gem 'capistrano-rbenv', '~> 2.0.3'
+  gem 'capistrano-passenger', '~> 0.1.1'
+end
+
