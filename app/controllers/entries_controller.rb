@@ -18,7 +18,8 @@ class EntriesController < ApplicationController
         else
           k = ""
         end
-        approved_entry = krake.entries.where(entry_type: 2, user_id: current_user.id).last
+        approved_entry = krake.entries.where(entry_type: 2,
+                                             user_id: current_user.id).last
         if !approved_entry.nil?
           approved_entry.destroy
         end
@@ -26,7 +27,10 @@ class EntriesController < ApplicationController
         return
       else
         flash[:error] = new_entry.errors.full_messages
-        redirect_to krakes_path(k0: k0, k: k, description: params[:entry][:description], url: params[:entry][:url])
+        redirect_to krakes_path(k0: k0,
+                                k: k, 
+                                description: params[:entry][:description], 
+                                url: params[:entry][:url])
       end
     else
       # Create keyword if it doesn't exist yet
@@ -74,7 +78,9 @@ class EntriesController < ApplicationController
           return
         rescue
           flash[:error] = @entry.errors.full_messages
-          redirect_to krakes_path(k0: k0, k: k, description: params[:entry][:description], url: params[:entry][:url])
+          redirect_to krakes_path(k0: k0, k: k,
+                                  description: params[:entry][:description],
+                                  url: params[:entry][:url])
         end
         raise ActiveRecord::Rollback
         redirect_to :back
