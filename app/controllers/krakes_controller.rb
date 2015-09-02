@@ -1,25 +1,16 @@
 class KrakesController < ApplicationController
   def index
-    @keyword_ids = []
-    if !params[:k].nil?
-      if !params[:k0].nil?
-        @current_keywords = [params[:k0].downcase]
-      else
-        @current_keywords = [nil]
-      end
-      @current_keywords.concat(params[:k].split("+"))
-    else
-      @current_keywords = [params[:k0], nil, nil, nil, nil]
-    end
-    @current_keywords.each do |k|
-      keyword = Keyword.find_by_description(k)
-      if !keyword.nil?
-        @keyword_ids << keyword.id
-      else
-        @keyword_ids << 0
-      end
-    end
-    @keyword_ids.sort!
+    @current_keywords = current_keywords(params[:k0], params[:k])
+    @keyword_ids = current_keyword_ids
+    #@current_keywords.each do |k|
+      #keyword = Keyword.find_by_description(k)
+      #if !keyword.nil?
+        #@keyword_ids << keyword.id
+      #else
+        #@keyword_ids << 0
+      #end
+    #end
+    #@keyword_ids.sort!
     @existing_krake = Krake.find_by_keyword_ids("+" + @keyword_ids.join("+") + "+")
     @related_keywords = Krake.related_keywords(@keyword_ids) - @keyword_ids
     if !@existing_krake.nil?
@@ -58,5 +49,34 @@ class KrakesController < ApplicationController
       k = ""
     end
     redirect_to krakes_path(k0: k0, k: k)
+  end
+
+  def current_keywords(param0, other_params)
+    if !other_params.nil?
+      if !param0.nil?
+        current_keywords = [param0.downcase]
+      else
+        current_keywords = [nil]
+      end
+      current_keywords.concat(other_params.split("+"))
+    else
+      current_keywords = [param0, nil, nil, nil, nil]
+    end
+    current_keywords = []
+    current_keywords
+  end  
+
+
+  def current_keyword_ids 
+    @keyword_ids = []
+    @current_keywords.each do |k|
+      keyword = Keyword.find_by_description(k)
+      if !keyword.nil?
+        @keyword_ids << keyword.id
+      else
+        @keyword_ids << 0
+      end
+    end
+    @keyword_ids.sort!
   end
 end
