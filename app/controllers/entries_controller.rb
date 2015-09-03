@@ -108,10 +108,16 @@ class EntriesController < ApplicationController
       k.count > 0 ? k = k.join("+") : k = ""
       @entry = Entry.find(params[:id])
       @entry.destroy
+      if @entry.entry_type == 1 && @entry.krake.entries.non_best.count > 0
+        @entry.krake.entries.non_best.first.update(entry_type: 1)
+      end
       redirect_to krakes_path(k0: params[:k0], k: k)
     else
       @entry = Entry.find(params[:id])
       @entry.destroy
+      if @entry.entry_type == 1 && @entry.krake.entries.non_best.count > 0
+        @entry.krake.entries.non_best.first.update(entry_type: 1)
+      end
       redirect_to :root
     end
   end

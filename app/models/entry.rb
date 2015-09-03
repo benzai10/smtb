@@ -14,6 +14,7 @@ class Entry < ActiveRecord::Base
   scope :disagreed,    -> { where(entry_type: 3) }
   scope :requested,    -> { where(entry_type: 4) }
   scope :user_created, -> { where(entry_type: [1, 3]) }
+  scope :non_best,     -> { where(entry_type: [2, 3]) }
   
   def url_empty?
     self.url.nil? || self.url.empty? ? true : false
