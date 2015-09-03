@@ -9,11 +9,13 @@ class Entry < ActiveRecord::Base
   validates :description, presence: true
   validates :url, :format => URI::regexp(%w(http https)), unless: :url_empty?
 
+  scope :best,         -> { where(entry_type: 1).last }
+  scope :approved,     -> { where(entry_type: 2) }
+  scope :disagreed,    -> { where(entry_type: 3) }
+  scope :requested,    -> { where(entry_type: 4) }
+  scope :user_created, -> { where(entry_type: [1, 3]) }
+  
   def url_empty?
-    if self.url.nil? || self.url.empty?
-      return true
-    else
-      return false
-    end
+    self.url.nil? || self.url.empty? ? true : false
   end
 end

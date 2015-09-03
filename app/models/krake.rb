@@ -2,11 +2,13 @@ class Krake < ActiveRecord::Base
   has_many :entries
 
   def self.search(k0, k1, k2, k3, k4, k5)
-    if k0
-      self.where('description = ?', "#{k0}")
-    else
-      self.all
-    end
+    k0 ? self.where('description = ?', "#{k0}") : self.all
+  end
+
+  def approval_score
+    approved_count = self.entries.approved.count
+    disagreed_count = self.entries.disagreed.count
+    100 * (approved_count + 1) / (approved_count + 1 + disagreed_count)
   end
 
   def self.related_keywords(keyword_ids)

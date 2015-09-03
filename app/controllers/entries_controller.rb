@@ -13,11 +13,7 @@ class EntriesController < ApplicationController
       if new_entry.save
         current_keywords.shift
         k = current_keywords
-        if k.count > 0
-          k = k.join("+")
-        else
-          k = ""
-        end
+        k.count > 0 ? k = k.join("+") : k = ""
         approved_entry = krake.entries.where(entry_type: 2,
                                              user_id: current_user.id).last
         if !approved_entry.nil?
@@ -93,11 +89,7 @@ class EntriesController < ApplicationController
     k0 = current_keywords.first
     current_keywords.shift
     k = current_keywords
-    if k.count > 0
-      k = k.join("+")
-    else
-      k = ""
-    end
+    k.count > 0 ? k = k.join("+") : k = ""
     @entry = Entry.find(params[:id])
     @entry.description = params[:entry][:description]
     @entry.url = params[:entry][:url]
@@ -113,11 +105,7 @@ class EntriesController < ApplicationController
     if !params[:k0].nil? || !params[:k].nil?
       current_keywords = params[:k].split
       k = current_keywords
-      if k.count > 0
-        k = k.join("+")
-      else
-        k = ""
-      end
+      k.count > 0 ? k = k.join("+") : k = ""
       @entry = Entry.find(params[:id])
       @entry.destroy
       redirect_to krakes_path(k0: params[:k0], k: k)
